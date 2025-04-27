@@ -1,9 +1,15 @@
-export class View {
+export abstract class View<T> {
 
-    // O modificador de acesso protected permite que a propriedade seja acessada apenas dentro da classe e em classes que herdam dela.
     protected elemento: HTMLElement;
 
     constructor(seletor: string) {
         this.elemento = document.querySelector(seletor);
     }
+
+    update(model: T): void {
+        const template = this.template(model);
+        this.elemento.innerHTML = template;
+    }
+
+    protected abstract template(model: T): string 
 }
